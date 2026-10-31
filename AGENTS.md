@@ -6,6 +6,7 @@ Do not implement the entire project in one large batch or create a single commit
 
 Work issue by issue. For each issue:
 - Create a feature branch from up-to-date `main`. Never push directly to `main`.
+- Open a draft pull request right after the first push: CI runs on pull requests and on `main`, not on bare branch pushes.
 - Develop in small, logically independent stages. Each commit must build and pass all tests on its own.
 
 For each completed stage:
@@ -16,7 +17,7 @@ For each completed stage:
 5. Verify on GitHub that CI passed for that exact commit; if it failed, fix it in a new commit.
 
 When the issue is done:
-- Open a pull request that references the issue (`Closes #N`) and describes what changed and how it was tested.
+- Mark the pull request ready for review. It references the issue (`Closes #N`) and describes what changed and how it was tested.
 - Merge only when CI is green, using a merge commit (squash and rebase merges are disabled), then delete the branch and confirm CI on `main` is green.
 
 Rules:
