@@ -54,7 +54,6 @@ jobs:
           reports: TestResults/**/coverage.cobertura.xml
           targetdir: TestResults/coverage
           reporttypes: MarkdownSummaryGithub;Cobertura
-          classfilters: '-Program'
 
       - name: Publish coverage summary
         if: always()
