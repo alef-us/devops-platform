@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DevopsPlatform.Api/DevopsPlatform.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DevopsPlatform.Api.Tests/DevopsPlatform.Api.Tests.csproj" />
+  </Folder>
+</Solution>
