@@ -9,10 +9,12 @@ COPY src/DevopsPlatform.Api/DevopsPlatform.Api.csproj src/DevopsPlatform.Api/
 RUN dotnet restore src/DevopsPlatform.Api/DevopsPlatform.Api.csproj
 
 COPY src/ src/
-ARG VERSION=0.0.0-local
+# Not "VERSION": MSBuild reads environment variables as properties, case-insensitively,
+# so a VERSION build arg would silently become $(Version) and break the build.
+ARG APP_VERSION=0.0.0-local
 RUN dotnet publish src/DevopsPlatform.Api/DevopsPlatform.Api.csproj \
         --configuration Release --no-restore --output /app \
-        -p:InformationalVersion="${VERSION}" -p:UseAppHost=false
+        -p:InformationalVersion="${APP_VERSION}" -p:UseAppHost=false
 
 # Runtime stage: chiseled Ubuntu, no shell or package manager, non-root user (app, uid 1654).
 FROM mcr.microsoft.com/dotnet/aspnet:10.0.14-noble-chiseled AS runtime
