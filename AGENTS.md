@@ -34,6 +34,10 @@ Rules:
 dotnet format --verify-no-changes   # style gate, same as CI
 dotnet build -c Release             # warnings are errors (Directory.Build.props)
 dotnet test -c Release              # unit and integration tests
+actionlint                          # GitHub Actions workflows
+hadolint --failure-threshold info Dockerfile
+shellcheck scripts/*.sh
+scripts/smoke-test.sh <base-url> [expected-version]   # against any running instance
 ```
 
 CI is [.github/workflows/ci.yml](.github/workflows/ci.yml). The roadmap and the meaning of each step are in [README.md](README.md) and the `roadmap` issues.
@@ -42,5 +46,7 @@ CI is [.github/workflows/ci.yml](.github/workflows/ci.yml). The roadmap and the 
 
 - Line endings are LF everywhere ([.gitattributes](.gitattributes), [.editorconfig](.editorconfig)), also when working on Windows.
 - Keep test coverage honest: do not exclude code from coverage reports to raise the number.
-- Use the latest major version of GitHub Actions; check the release before bumping.
+- Use the latest major version of GitHub Actions; check the release before bumping. Pin third-party actions by commit SHA with the version in a comment.
 - Dependabot PRs with major version bumps: confirm in the CI log that all tests were still discovered and coverage was still collected before merging.
+- Docker build args and environment variables must not share a name with an MSBuild property (`VERSION`, `CONFIGURATION`...): MSBuild reads the environment as properties, case-insensitively. The version arg is `APP_VERSION`.
+- A green security or test step is not proof on its own: check that it actually scanned or ran something.
