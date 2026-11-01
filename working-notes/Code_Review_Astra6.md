@@ -1,5 +1,5 @@
 **Review Date:** 2026-11-01 00:04 AM UTC  
-**Reviewed commit:** `main` [`8dbe73a`](https://github.com/alef-us/devops-platform/commit/8dbe73a1ca60a220068d7da0b7fd94214281b208)  
+**Reviewed commit:** `main` [`8dbe73a`](https://github.com/alef-us/devops-platform/tree/8dbe73a1ca60a220068d7da0b7fd94214281b208)  
 **Review type:** Independent code review
 
 PROMPT:
