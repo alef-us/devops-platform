@@ -24,7 +24,9 @@ Rules:
 - Commit as the repository owner: `alef-us <248708568+alef-us@users.noreply.github.com>`, so contributions count on the profile.
 - Do not use force push, and do not amend, rebase or otherwise rewrite commits that are already pushed.
 - No empty or backdated commits.
-- Stop and ask before design decisions with several reasonable options, and before creating anything that costs money (cloud resources); destroy temporary cloud resources after use.
+- Stop and ask before design decisions with several reasonable options.
+- Stop and ask before creating anything that costs money (cloud resources).
+- Destroy temporary cloud resources after use.
 
 ## Build and test
 
