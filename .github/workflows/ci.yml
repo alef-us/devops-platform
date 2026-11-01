@@ -103,3 +103,27 @@ jobs:
             echo "::error::the image must run as a numeric non-root uid, got '$user'"; exit 1
           fi
           docker image ls "$IMAGE" --format 'image size: {{.Size}}' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Lint shell scripts
+        run: shellcheck scripts/*.sh
+
+      - name: Run container (hardened, as in Kubernetes)
+        run: |
+          docker run --detach --name api --publish 8080:8080 \
+            --read-only --tmpfs /tmp \
+            --cap-drop ALL --security-opt no-new-privileges \
+            "$IMAGE"
+
+      - name: Smoke test the container
+        run: scripts/smoke-test.sh http://localhost:8080 "$GITHUB_SHA"
+
+      - name: Container logs are JSON
+        run: |
+          docker logs api > api.log 2>&1
+          test -s api.log
+          jq -e . api.log > /dev/null
+          echo "$(wc -l < api.log) log lines, all valid JSON"
+
+      - name: Container logs
+        if: always()
+        run: docker logs api 2>&1 || true
