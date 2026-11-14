@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # Build stage: full SDK, restore cached separately from the source.
-FROM mcr.microsoft.com/dotnet/sdk:10.0.403-noble AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0.404-noble AS build
 WORKDIR /src
 
 COPY global.json Directory.Build.props .editorconfig ./
@@ -17,7 +17,7 @@ RUN dotnet publish src/DevopsPlatform.Api/DevopsPlatform.Api.csproj \
         -p:InformationalVersion="${APP_VERSION}" -p:UseAppHost=false
 
 # Runtime stage: chiseled Ubuntu, no shell or package manager, non-root user (app, uid 1654).
-FROM mcr.microsoft.com/dotnet/aspnet:10.0.14-noble-chiseled AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:10.0.15-noble-chiseled AS runtime
 WORKDIR /app
 COPY --from=build /app .
 
